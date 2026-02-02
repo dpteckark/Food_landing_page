@@ -5,8 +5,6 @@ import { ToastContainer, toast, Zoom } from "react-toastify";
 export const CartContext = createContext();
 
 export const CartProvider = (props) => {
-  console.log("test");
-
   const [cart, setCart] = useState(() => {
     const storedCart = localStorage.getItem("cart");
     return storedCart ? JSON.parse(storedCart) : [];
