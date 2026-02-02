@@ -1,12 +1,18 @@
-import { createContext, useContext, useMemo } from "react";
+import { createContext, useContext, useMemo, useState, useEffect } from "react";
 import { initialProducts } from "../data/product";
-import { useState } from "react";
 import { ToastContainer, toast, Zoom } from "react-toastify";
 
 export const CartContext = createContext();
 
 export const CartProvider = (props) => {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    const storedCart = localStorage.getItem("cart");
+    return storedCart ? JSON.parse(storedCart) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   const products = initialProducts;
 
