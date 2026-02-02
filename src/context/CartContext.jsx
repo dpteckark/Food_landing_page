@@ -74,7 +74,10 @@ export const CartProvider = (props) => {
     });
   };
 
-  const clearCart = () => setCart([]);
+  const clearCart = () => {
+    setCart([]);
+    localStorage.removeItem("cart");
+  };
 
   const cartCount = useMemo(
     () => cart.reduce((total, item) => total + item.quantity, 0),
